@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="CritterApplication" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="assignment.CritterApplication" />
+    <module name="prog3" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
