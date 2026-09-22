@@ -1,10 +1,10 @@
 # Submission Info
 
-Names:
+Names: Dinesh Nalliah, Amaan Faisal
 
-EIDs:
+EIDs: dkn547, 
 
-Emails:
+Emails: dkn547@my.utexas.edu, 
 
 Time Spent:
 
