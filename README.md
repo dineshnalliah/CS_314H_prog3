@@ -2,9 +2,9 @@
 
 Names: Dinesh Nalliah, Amaan Faisal
 
-EIDs: dkn547, 
+EIDs: dkn547, amf5765
 
-Emails: dkn547@my.utexas.edu, 
+Emails: dkn547@my.utexas.edu, amaanfaisal@utexas.edu
 
 Time Spent:
 
