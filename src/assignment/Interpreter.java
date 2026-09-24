@@ -35,17 +35,18 @@ public class Interpreter implements CritterInterpreter {
 		while (true) {
 			// running off either end of the program means this critter is done
 			if (line < 1 || line > code.size()) {
+				c.setNextCodeLine(line); // setting it to a invalid codeline will kill it
 				return;
 			}
 
 			actions++;
 
 			// prevent infinite behavior
-			final int MAX_ACTIONS = 1000; // 1000 is arbitrary 
-			if (actions > MAX_ACTIONS) {
-				System.err.println("critter looped without acting; forfeiting its turn");
-				return;
-			}
+			// final int MAX_ACTIONS = 1000; 
+			// if (actions > MAX_ACTIONS) {
+			// 	System.err.println("critter looped without acting; forfeiting its turn");
+			// 	return;
+			// }
 
 			Argument a = code.get(line - 1);
 			int p1 = a.getParamOne();
