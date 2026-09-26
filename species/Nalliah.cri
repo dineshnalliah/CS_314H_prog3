@@ -1,0 +1,52 @@
+Nalliah
+ifenemy 0 19
+ifenemy 45 15
+ifenemy 315 17
+write r3 0
+ifgt r1 r3 9
+write r1 5
+ifrandom 17
+go 15
+ifwall 0 15
+ifempty 0 12
+go 17
+dec r1
+hop
+go 1
+right
+go 1
+left
+go 1
+ifhungry 22
+infect 1
+go 1
+eat
+go 1
+
+
+Line-by-line explanation:
+   1  ifenemy 0 19     enemy dead ahead then attack block
+   2  ifenemy 45 15    enemy front-right then turn right to face it
+   3  ifenemy 315 17   enemy front-left then turn left to face it
+   4  write r3 0       reset r3 for newly infected critters
+   5  ifgt r1 r3 9     if there are steps left in this leg then keep walking
+   6  write r1 5       otherwise start a new leg of 5 steps
+   7  ifrandom 17      beginning with a turn, left or right at random
+   8  go 15
+   9  ifwall 0 15      wall or obstacle ahead then turn
+  10  ifempty 0 12     path clear then walk
+  11  go 17            blocked by another critter then turn
+  12  dec r1           one step off this leg
+  13  hop
+  14  go 1
+  15  right            turn right then rescan next turn
+  16  go 1
+  17  left             turn left then rescan next turn
+  18  go 1
+  19  ifhungry 22      eating if hungry, otherwise infect
+  20  infect 1         convert the enemy, have it start at line 1 scanning
+  21  go 1
+  22  eat              resets hunger and grants the boost
+  23  go 1
+
+
