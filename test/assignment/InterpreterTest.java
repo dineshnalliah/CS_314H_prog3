@@ -146,6 +146,7 @@ public class InterpreterTest {
 
     @Test
     void invalidJumpDestination() throws IOException {
+        // since registers start at 0, jump is outside of program
         TestCritter critter = createCritter("go r1\n");
 
         interpreter.executeCritter(critter);
@@ -161,6 +162,7 @@ public class InterpreterTest {
 
     @Test
     void resumesAcrossTurns() throws IOException {
+        // Each call should resume immediately after previous action
         TestCritter critter = createCritter(
                 "inc r1\n"
                 + "hop\n"
