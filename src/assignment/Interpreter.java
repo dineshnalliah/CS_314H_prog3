@@ -35,7 +35,7 @@ public class Interpreter implements CritterInterpreter {
 		while (true) {
 			// running off either end of the program means this critter is done
 			if (line < 1 || line > code.size()) {
-				c.setNextCodeLine(line); // setting it to a invalid codeline will kill it
+				c.setNextCodeLine(code.size() + 1); // always invalid
 				return;
 			}
 
