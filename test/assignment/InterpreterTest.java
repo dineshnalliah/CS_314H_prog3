@@ -120,6 +120,71 @@ public class InterpreterTest {
     }
 
     @Test
+    void relativeJumpCommand() throws IOException {
+        TestCritter critter = createCritter(
+                "go +2\n"
+                + "left\n"
+                + "right\n");
+
+        interpreter.executeCritter(critter);
+
+        assertEquals("right", critter.action);
+    }
+
+    @Test
+    void registerJumpCommand() throws IOException {
+        TestCritter critter = createCritter(
+                "write r1 4\n"
+                + "go r1\n"
+                + "left\n"
+                + "right\n");
+
+        interpreter.executeCritter(critter);
+
+        assertEquals("right", critter.action);
+    }
+
+    @Test
+    void invalidJumpDestination() throws IOException {
+        TestCritter critter = createCritter("go r1\n");
+
+        interpreter.executeCritter(critter);
+
+        assertNull(critter.action);
+        assertEquals(2, critter.nextCodeLine);
+
+        interpreter.executeCritter(critter);
+
+        assertNull(critter.action);
+        assertEquals(2, critter.nextCodeLine);
+    }
+
+    @Test
+    void resumesAcrossTurns() throws IOException {
+        TestCritter critter = createCritter(
+                "inc r1\n"
+                + "hop\n"
+                + "inc r1\n"
+                + "left\n"
+                + "go 1\n");
+
+        interpreter.executeCritter(critter);
+        assertEquals("hop", critter.action);
+        assertEquals(1, critter.getReg(1));
+        assertEquals(3, critter.nextCodeLine);
+
+        interpreter.executeCritter(critter);
+        assertEquals("left", critter.action);
+        assertEquals(2, critter.getReg(1));
+        assertEquals(5, critter.nextCodeLine);
+
+        interpreter.executeCritter(critter);
+        assertEquals("hop", critter.action);
+        assertEquals(3, critter.getReg(1));
+        assertEquals(3, critter.nextCodeLine);
+    }
+
+    @Test
     void ifRandomCommand() throws IOException {
         TestCritter critter = createCritter(
                 "ifrandom 3\n"
