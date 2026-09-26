@@ -14,6 +14,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 public class InterpreterTest {
 
+    // JUnit uses this for temporary files (reduces clutter)
     @TempDir
     Path tempDirectory;
 
@@ -105,6 +106,9 @@ public class InterpreterTest {
 
     @Test
     void goCommand() throws IOException {
+        // Line 2 is the fallback action
+        // a successful jump should reach line 3
+        // The conditional command tests below use a similar idea
         TestCritter critter = createCritter(
                 "go 3\n"
                 + "left\n"
@@ -329,6 +333,7 @@ public class InterpreterTest {
 
     @Test
     void pastProgramEnd() throws IOException {
+        // the critter shouldn't restart its program on the next turn
         CritterSpecies species = loadSpecies(
                 "OneLine\n"
                 + "write r1 7\n");
@@ -343,6 +348,7 @@ public class InterpreterTest {
 
     @Test
     void longProgram() throws IOException {
+        // Non-action commands can run repeatedly before an action
         StringBuilder program = new StringBuilder("LongProgram\n");
         for (int i = 0; i < 1001; i++) {
             program.append("inc r1\n");
@@ -359,6 +365,7 @@ public class InterpreterTest {
     }
 
     private TestCritter createCritter(String instructions) throws IOException {
+        // most command tests only need a species name followed by a few lines
         CritterSpecies species = loadSpecies("TestSpecies\n" + instructions);
         assertNotNull(species);
         return new TestCritter(species);
@@ -370,9 +377,11 @@ public class InterpreterTest {
         return interpreter.loadSpecies(file.toString());
     }
 
+    // A testable Critter implementation that records the interpreter's action
     private static class TestCritter implements Critter {
 
         private final List code;
+        // Register numbers start at 1, so index 0 is not used intially
         private final int[] registers = new int[Critter.REGISTERS + 1];
 
         private int nextCodeLine = 1;
@@ -411,6 +420,7 @@ public class InterpreterTest {
             return hungerLevel;
         }
 
+        // Rather than running a simulation, these methods simply record the action
         public void hop() {
             action = "hop";
         }
