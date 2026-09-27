@@ -6,7 +6,7 @@ EIDs: dkn547, amf5765
 
 Emails: dkn547@my.utexas.edu, amaanfaisal@utexas.edu
 
-Time Spent: ~12 hours each (details in report)
+Time Spent: ~12 hours (details in report)
 
 Collaborators: None
 
